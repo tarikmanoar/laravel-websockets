@@ -7,6 +7,10 @@ git clone https://github.com/tarikmanoar/websocket
 ```composer
 composer install
 ```
+## Migrate Database
+```ssh
+php artisan migrate:fresh --seed
+```
 ## Start Websocket server
 ```ssh
 php artisan  websocket:serve
