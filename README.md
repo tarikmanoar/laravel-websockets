@@ -1,7 +1,7 @@
 ## Git Clone
 
 ```ssh
-git clone https://github.com/tarikmanoar/websocket
+git clone https://github.com/tarikmanoar/laravel-websockets
 ```
 ## Install Composer and copy .env.example
 ```composer
