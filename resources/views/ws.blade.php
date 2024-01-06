@@ -5,7 +5,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>SOCKET</title>
+        <title>SOCKETS</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -77,26 +77,42 @@
             const audio = new Audio('{{asset('chat.mp3')}}');
             $(function(){
             $('#send').click(function(){
-                $.ajax({
-                    url: '/send',
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: $("#id").val(),
-                        message: $("#message").val()
-                    },
-                    success: function(response){
-                        console.log(response);
-                    }
+                    $.ajax({
+                        url: '/send',
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            id: $("#id").val(),
+                            message: $("#message").val()
+                        },
+                        success: function(response){
+                            console.log(response);
+                        }
+                    });
                 });
+                Echo.channel(`general-{{$id}}`)
+                    .listen('TestEvent', (e) => {
+                        console.log(e.message);
+                        audio.play();
+                        $('#soket').append('<li>'+e.message+'</li>');
+                    });
+                Echo.private('App.Models.User.' + 1)
+                    .notification((notification) => {
+                        audio.play();
+                        console.log(notification);
+                    });
+
+                // Echo.join(`presence-channel.${id}`)
+                //     .here((users) => {
+                //         //
+                //     })
+                //     .joining((user) => {
+                //         console.log(user.name);
+                //     })
+                //     .leaving((user) => {
+                //         console.log(user.name);
+                //     });
             });
-            Echo.channel(`{{$id}}-general`)
-                .listen('TestEvent', (e) => {
-                    console.log(e.message);
-                    audio.play();
-                    $('#soket').append('<li>'+e.message+'</li>');
-                });
-        });
         </script>
     </body>
 

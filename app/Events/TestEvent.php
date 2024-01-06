@@ -21,6 +21,7 @@ class TestEvent implements ShouldBroadcast
     {
         //
     }
+
     /**
      * Get the channels the event should broadcast on.
      *
@@ -29,7 +30,7 @@ class TestEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel($this->id.'-general'),
+            new Channel("general-{$this->id}"),
         ];
     }
 }

@@ -16,14 +16,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    $user = auth()->user();
+    if ($user) {
+        $user->notify(new \App\Notifications\TestNotification());
+    }
+    return $user->notifications;
     return view('welcome');
 });
-Route::view('/soket/{id}', 'soket');
-Route::get('/event', function () {
+Route::view('ws/{id}', 'ws');
+Route::get('event', function () {
     event(new TestEvent('Hey how are you?', 1));
     return 'Fired an event';
 });
-Route::post('/send', function (Request $request) {
+Route::post('send', function (Request $request) {
     event(new TestEvent($request->message, $request->id));
-    return 'Event sent';
+    return response()->json($request);
 });

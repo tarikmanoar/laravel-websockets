@@ -8,11 +8,10 @@
         "php": "^8.1",
         "beyondcode/laravel-websockets": "^1.14",
         "guzzlehttp/guzzle": "^7.2",
+        "laravel/fortify": "^1.19",
         "laravel/framework": "^10.10",
-        "laravel/pulse": "^1.0@beta",
         "laravel/sanctum": "^3.3",
-        "laravel/tinker": "^2.8",
-        "pusher/pusher-php-server": "^7.2"
+        "laravel/tinker": "^2.8"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -64,6 +63,6 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "beta",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
